@@ -13,7 +13,7 @@ footer {
 
 #test {
   display: block;
-  margin: 10px auto 0;
+  margin: 20px 0 0 2px;
   background-color: blueviolet;
   padding: 10px 15px;
   border: none;
@@ -21,9 +21,9 @@ footer {
   font-weight: bold;
   border-radius: 10px;
 }
-.honor-roll-images {
+#honor-roll-images {
   display: flex;
 }
-.honor-roll-images img {
+#honor-roll-images img {
   width: 200px;
 }
