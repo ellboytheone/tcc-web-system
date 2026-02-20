@@ -1,2 +1,29 @@
-*{margin: 0; padding: 0; box-sizing: border-box;}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+section,
+main,
+footer {
+  margin: 1em 0;
+}
 
+/*PENDING!!*/
+
+#test {
+  display: block;
+  margin: 10px auto 0;
+  background-color: blueviolet;
+  padding: 10px 15px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.honor-roll-images {
+  display: flex;
+}
+.honor-roll-images img {
+  width: 200px;
+}
