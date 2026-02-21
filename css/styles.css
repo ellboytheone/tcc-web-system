@@ -1,16 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-section,
-main,
-footer {
-  margin: 1em 0;
-}
-
 /*PENDING!!*/
-
 #test {
   display: block;
   margin: 20px 0 0 2px;
