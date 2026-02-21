@@ -10,18 +10,18 @@
     <header>
       <span class="logo-container">
         <a href="/">
-          <img src="/index.html" alt="GABnet Logo" />
+          <img src="/assets/images/gabnet-logo" alt="Logo do GABnet" />
         </a>
       </span>
-      <span class="school-name"
-        >Instituto Politécnico Privado GAB do Saber</span
-      >
-      <span class="page-mode">
-        <span>Modo Visitante</span>
-        <a href="#login-aside"> Trocar de modo</a>
+      <span class="auth-text">
+        <a href="/login.html">Iniciar sessão</a>
+        &#124;
+        <a href="/signin.html">Registrar</a>
       </span>
     </header>
-    <button id="test" onclick="testThePage()">Teste do Javascript</button>
+    <button id="test" onclick="testThePage()" style="cursor: pointer">
+      Teste do Javascript
+    </button>
     <main id="greetings-section">
       <h1>Bem-vindo ao Portal GABnet</h1>
       <p>
@@ -44,9 +44,9 @@
       <div class="description-block">
         <h3>Público-Alvo</h3>
         <p>
-          Destina-se aos <a href="#">membros da instituição</a>, nomeadamente,
-          estudantes, professores e funcionários, e até à visitantes
-          interessados na instituição.
+          Destina-se aos <a href="login.html">membros da instituição</a>,
+          nomeadamente, estudantes, professores e funcionários, e até à
+          visitantes interessados na instituição.
         </p>
       </div>
       <div class="description-block">
@@ -87,21 +87,21 @@
           <figure>
             <img
               src="assets/images/student-example.png"
-              alt="honor roll student image"
+              alt="Estudante do quadro de honra ou Destaque"
             />
             <figcaption>Melhor Aluno de Informática</figcaption>
           </figure>
           <figure>
             <img
               src="assets/images/student-example.png"
-              alt="honor roll student image"
+              alt="Estudante do quadro de honra ou Destaque"
             />
             <figcaption>Melhor Aluno de Electrônica</figcaption>
           </figure>
           <figure>
             <img
               src="assets/images/student-example.png"
-              alt="honor roll student image"
+              alt="Estudante do quadro de honra ou Destaque"
             />
             <figcaption>Melhor Aluno de Administração</figcaption>
           </figure>
@@ -109,13 +109,12 @@
       </article>
     </section>
     <aside id="login-aside">
-      <p>És aluno?</p>
-      <a href="#login-aside"><button>Iniciar sessão</button></a>
+      <p>És aluno? <a href="/login.html">Iniciar sessão</a></p>
     </aside>
     <footer>
       <address>
-        Luanda, Samba, Morro-Bento, na rua depois do IMETRO Contacto: +244 922
-        234 556 | contacto@gabnet.com
+        Luanda, Samba, Morro-Bento, na rua depois do IMETRO Contacto: +244 923
+        456 789 | contacto@gabnet.com
       </address>
 
       <p>
