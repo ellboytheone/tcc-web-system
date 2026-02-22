@@ -1,6 +1,10 @@
 .invisible {
   display: none;
 }
+
+.visible {
+  display: block;
+}
 /*PENDING!!*/
 #test {
   display: block;
