@@ -34,9 +34,7 @@
         </form>
         <p>
           Nunca te registraste?
-          <a href="javascript:void(0)" onclick="showForm('signin-section')"
-            >Registrar</a
-          >
+          <a href="javascript:void(0)" onclick="showSignin()">Registrar</a>
         </p>
       </section>
       <section class="form-box invisible" id="signin-section">
@@ -51,12 +49,17 @@
             <input type="text" name="last-name" id="last-name" required />
           </div>
           <div class="input-box">
-            <label for="email">E-mail:</label>
-            <input type="email" name="email" id="email" required />
+            <label for="sign-email">E-mail:</label>
+            <input type="email" name="email" id="sign-email" required />
           </div>
           <div class="input-box">
-            <label for="password">Senha:</label>
-            <input type="password" name="password" id="password" required />
+            <label for="sign-password">Senha:</label>
+            <input
+              type="password"
+              name="password"
+              id="sign-password"
+              required
+            />
           </div>
           <div class="input-box" id="sign-code-box">
             <label for="sign-code">Código de Registro:</label>
@@ -74,7 +77,7 @@
         </form>
         <p>
           Já tens conta?
-          <a href="javascript:void(0)" onclick="showForm('login-section')"
+          <a href="javascript:void(0)" onclick="showLogin()"
             >Entrar</a
           >
         </p>
