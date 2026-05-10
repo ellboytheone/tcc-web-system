@@ -6,9 +6,10 @@
   --sb-bg-a: #0a1628;
   --green-dim: rgba(18, 160, 106, 0.18);
   --bg2: #e8edf7;
-  --lock-bg: #f7f8fc;
-  --lock-brd: #e8ecf6;
-  --lock-txt: #8896b0;
+  --bg3: #e8f7eb;
+  --lock-bg: #f0f0f0;
+  --lock-brd: #d4d4d4;
+  --lock-txt: #acacac;
   --sidebar-w: 250px;
   --header-h: 70px;
   --shadow-sm: 0 2px 16px rgba(11, 61, 145, 0.09);
@@ -176,8 +177,9 @@ table {
   font-weight: 600;
 }
 .teacher .nav-link.active {
-  background-color: var(--yellow);
-  color: var(--green);
+  background-color: var(--green-dim);
+  border: 1px solid rgba(18, 160, 106, 0.25);
+  color: #5de8ae;
   font-weight: 600;
 }
 .admin .nav-link.active svg {
@@ -320,10 +322,13 @@ table {
   background-color: var(--sb-bg-a);
 }
 .content {
-  background-color: var(--bg2);
+  background-color: var(--bg);
   flex: 1;
   padding: 28px;
   overflow-y: auto;
+}
+.teacher .content {
+  background-color: var(--bg3);
 }
 .main-header,
 .greeting {
@@ -343,9 +348,11 @@ table {
   color: var(--blue-m);
   font-style: italic;
 }
+.teacher .main-header h1 em,
 .teacher .greeting h1 em {
   color: var(--green);
 }
+.admin .main-header h1 em,
 .admin .greeting h1 em {
   color: var(--blue-c);
 }
@@ -546,6 +553,11 @@ table {
   background-color: var(--blue-bg);
   color: var(--blue-m);
   border: 1px solid var(--blue-brd);
+}
+.teacher .panel-header-text.editable-pill {
+  background-color: rgba(18, 160, 106, 0.12);
+  color: var(--green);
+  border: 1px solid rgba(18, 160, 106, 0.3);
 }
 .panel-header-text.locked-pill {
   background-color: var(--lock-bg);
@@ -1113,6 +1125,93 @@ table {
   outline: none;
   transition-duration: 0.15s;
   appearance: none;
+}
+.imp-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.imp-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.imp-card {
+  position: relative;
+}
+.imp-card label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 6px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background-color: var(--bg);
+  cursor: pointer;
+  transition-duration: 0.15s;
+  text-align: center;
+}
+.imp-card label:hover {
+  background: var(--bg2);
+  border-color: #b8d4c8;
+}
+.imp-card input:checked + label.low {
+  border-color: var(--blue-brd);
+  background-color: var(--blue-bg);
+}
+.imp-card input:checked + label.medium {
+  border-color: var(--orange-brd);
+  background-color: var(--orange-bg);
+}
+.imp-card input:checked + label.high {
+  border-color: var(--red-brd);
+  background-color: var(--red-bg);
+}
+.imp-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imp-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ii-low {
+  background-color: var(--blue-bg);
+}
+.ii-low svg {
+  stroke: var(--blue);
+}
+.ii-medium {
+  background-color: var(--orange-bg);
+}
+.ii-medium svg {
+  stroke: var(--orange);
+}
+.ii-high {
+  background-color: var(--red-bg);
+}
+.ii-high svg {
+  stroke: var(--red);
+}
+.imp-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--txt-dark);
+}
+.imp-desc {
+  font-size: 0.65rem;
+  color: var(--txt-3);
+  line-height: 1.35;
 }
 .include-parents-field {
   display: flex;

@@ -148,7 +148,7 @@
             <span>até 10:30</span>
           </div>
         </section>
-        <section class="current-lesson-card" style="display: none;">
+        <section class="current-lesson-card">
           <div class="cl-pulse">
             <svg viewBox="0 0 24 24">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
@@ -203,7 +203,7 @@
                   12.ª Informática - Horário semanal 
                 </h2>
                 <p class="panel-header-text">
-                  13 aulas · 5 disciplinas 
+                  13 aulas · 3 disciplinas 
                 </p>
               </div>
               <div class="week-grid-wrap">

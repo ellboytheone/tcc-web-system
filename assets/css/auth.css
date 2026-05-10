@@ -1,7 +1,6 @@
 :root {
   --blue-bg: #ebf1fd;
   --blue-brd: #bacaf5;
-  --green-brd: #a7dfc4;
   --red-brd: #fabfc5;
 
   --txt-3: #9aaac0;
@@ -901,4 +900,16 @@ body {
   font-size: 0.68rem;
   color: var(--txt-3);
   font-weight: 500;
+}
+@media (max-width: 1000px) {
+  body{
+    align-items: center;
+    justify-content: center;
+  }
+  .right-panel {
+    width: 100%;
+  }
+  .left-panel {
+    display: none;
+  }
 }

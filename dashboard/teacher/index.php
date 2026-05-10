@@ -328,12 +328,67 @@
                     <input type="text" id="title" name="title" placeholder="Ex: Cancelamento de aulas..." maxlength="150" required/>
                   </div>
                   <div class="form-field">
-                    <label for="imp">Importância <span>*</span></label>
-                    <select id="imp" name="importancia" required>
+                    <label>Nível de importância <span>*</span></label>
+                    <div class="imp-cards">
+                      <div class="imp-card">
+                        <input type="radio" id="imp-b" name="importance" value="Baixa" onchange="updatePreview()"/>
+                        <label for="imp-b" class="low">
+                          <div class="imp-icon ii-low">
+                            <svg viewBox="0 0 24 24">
+                              <circle cx="12" cy="12" r="10"/>
+                              <line x1="12" y1="8" x2="12" y2="12"/>
+                              <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                          </div>
+                          <div class="imp-lbl">Baixa</div>
+                          <div class="imp-desc">Informação geral</div>
+                        </label>
+                      </div>
+                      <div class="imp-card">
+                        <input type="radio" id="imp-m" name="importance" value="Média" onchange="updatePreview()"/>
+                        <label for="imp-m" class="medium">
+                          <div class="imp-icon ii-medium">
+                            <svg viewBox="0 0 24 24">
+                              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                              <line x1="12" y1="9" x2="12" y2="13"/>
+                              <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                          </div>
+                          <div class="imp-lbl">Média</div>
+                          <div class="imp-desc">Requer atenção</div>
+                        </label>
+                      </div>
+                      <div class="imp-card">
+                        <input type="radio" id="imp-a" name="importance" value="Alta" onchange="updatePreview()"/>
+                        <label for="imp-a" class="high">
+                          <div class="imp-icon ii-high">
+                            <svg viewBox="0 0 24 24">
+                              <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/>
+                              <line x1="12" y1="8" x2="12" y2="12"/>
+                              <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                          </div>
+                          <div class="imp-lbl">Alta</div>
+                          <div class="imp-desc">Urgente — destaque</div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label for="target">Alvo<span>*</span></label>
+                    <select id="target" name="target" required>
                       <option value="" disabled selected>Selecionar...</option>
-                      <option value="Baixa">Baixa</option>
-                      <option value="Média">Média</option>
-                      <option value="Alta">Alta</option>
+                      <option value="everyone">Todos</option>
+                      <option value="students">Alunos</option>
+                      <option value="teachers">Professores</option>
+                      <option value="admins">Administradores</option>
+                      <option value="class">Turma</option>
+                    </select>
+                    <select id="target-class" name="target-class" style="display: none;">
+                      <option value="" disabled selected>Selecione a turma</option>
+                      <option value="10 INF">10ª Informática</option>
+                      <option value="11 INF">11ª Informática</option>
+                      <option value="12 INF">12ª Informática</option>
                     </select>
                   </div>
                   <div class="form-field">

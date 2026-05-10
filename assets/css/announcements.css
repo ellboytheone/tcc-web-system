@@ -201,13 +201,13 @@
   height: 5px;
 }
 .rp-imp-high .rp-imp-stripe {
-  background: var(--red);
+  background-color: var(--red);
 }
 .rp-imp-medium .rp-imp-stripe {
-  background: var(--orange);
+  background-color: var(--orange);
 }
 .rp-imp-low .rp-imp-stripe {
-  background: var(--gray-txt);
+  background-color: var(--gray-txt);
 }
 .rp-header {
   padding: 18px 20px 14px;
@@ -263,4 +263,188 @@
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--txt-dark);
+}
+/*Painel professor*/
+.flow-card {
+  background-color: var(--sb-bg-t);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 26px;
+  animation: fadeUp 0.5s 0.04s ease both;
+  position: relative;
+  overflow: hidden;
+}
+.flow-card::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(18, 160, 106, 0.1);
+}
+.flow-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 12px;
+}
+.flow-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fs-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: var(--green-dim);
+  border: 1px solid rgba(18, 160, 106, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #5de8ae;
+  flex-shrink: 0;
+}
+.fs-txt {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+}
+.flow-arrow {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 1rem;
+  margin: 0 4px;
+}
+.flow-nota {
+  margin-top: 12px;
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.flow-nota svg {
+  width: 12px;
+  height: 12px;
+  stroke: rgba(18, 160, 106, 0.7);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.preview-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeUp 0.5s 0.08s ease both;
+}
+.preview-section .panel{
+  height: 100%;
+}
+.prev-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background-color: var(--purple-bg);
+  border: 1px solid var(--purple-brd);
+  border-radius: 9px;
+  font-size: 0.74rem;
+  color: var(--purple);
+  line-height: 1.5;
+}
+.prev-note svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.panel-body {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 15px;
+}
+.prev-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.my-announcements {
+  margin-top: 30px;
+  animation: fadeUp 0.5s 0.15s ease both;
+}
+.my-announce-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.my-announce-header h2 {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.3rem;
+}
+.my-announce-header h2 em {
+  color: var(--green);
+  font-style: italic;
+}
+.request-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.request-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 0.73rem;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.request-chip.pending {
+  background: var(--orange-bg);
+  color: var(--orange);
+  border-color: var(--orange-brd);
+}
+.request-chip.approved {
+  background: #e6f5ee;
+  color: var(--green);
+  border-color: #a7dfc4;
+}
+.request-chip.denied {
+  background: var(--red-bg);
+  color: var(--red);
+  border-color: var(--red-brd);
+}
+.annoucements-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }

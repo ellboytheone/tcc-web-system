@@ -464,6 +464,29 @@
             </form>
           </div>
         </section>
+        <div class="danger-zone">
+          <div class="dz-head">
+            <svg viewBox="0 0 24 24">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <strong>Terminar sessão</strong>
+          </div>
+          <div class="dz-body">
+            Ao terminar a sessão, serás redirecionado para a página de login. Todos os dados não guardados serão perdidos.
+          </div>
+          <form method="POST" action="../../auth/logout.php">
+            <button type="submit" class="btn-danger">
+              <svg viewBox="0 0 24 24">
+                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+              Terminar sessão agora
+            </button>
+          </form>
+        </div>
       </main>
     </div>
   </body>

@@ -1,5 +1,5 @@
 .next-lesson-card {
-  background-color: var(--blue-bg);
+  background-color: var(--white);
   border: 1px solid var(--blue-brd);
   border-radius: var(--radius-lg);
   padding: 16px 20px;
@@ -279,9 +279,16 @@
   background-color: var(--bg);
   border-bottom: 1px solid var(--border);
 }
+.teacher .wg-header {
+  background-color: var(--green-bg);
+}
 .wg-header.today {
   color: var(--blue-m);
-  background-color: var(--blue-bg);
+  background-color: #c3d7f1;
+}
+.teacher .wg-header.today {
+  color: var(--green);
+  background-color: #bdebd0;
 }
 .wg-header.today .today-dot {
   display: inline-block;
@@ -291,6 +298,9 @@
   background-color: var(--blue-m);
   vertical-align: middle;
   margin-left: 3px;
+}
+.teacher .wg-header.today .today-dot {
+  background-color: var(--green);
 }
 .week-day-col {
   border-right: 1px solid var(--border);
@@ -314,6 +324,9 @@
   transition-duration: 0.15s;
   position: relative;
 }
+.teacher .wd-lesson {
+  border-left: 3px solid var(--green);
+}
 .wd-lesson:hover {
   box-shadow: var(--shadow);
   transform: translateY(-1px);
@@ -327,6 +340,7 @@
   line-height: 1.25;
   margin-bottom: 2px;
 }
+.wd-lesson-class,
 .wd-lesson-teacher {
   font-size: 0.65rem;
   opacity: 0.7;
@@ -354,6 +368,9 @@
   border-radius: 4px;
   margin-top: 4px;
 }
+.teacher .now-badge {
+  background-color: var(--green);
+}
 .now-dot {
   width: 4px;
   height: 4px;
@@ -370,6 +387,9 @@
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
+.teacher .week-footer-cell{
+  background-color: var(--green-bg);
+}
 .week-footer-cell:last-child {
   border-right: none;
 }
@@ -377,6 +397,279 @@
   font-weight: 700;
   color: var(--txt);
 }
+/*Teacher panel*/
+.week-charge-card {
+  background-color: var(--sb-bg-t);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeUp 0.5s 0.08s ease both;
+  position: relative;
+  overflow: hidden;
+}
+.week-charge-card::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+}
+.week-charge-card::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 40%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(18, 160, 106, 0.1);
+}
+.wcc-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--green-dim);
+  border: 1px solid rgba(18, 160, 106, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.wcc-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #5de8ae;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wcc-text {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+.wcc-text .wcc-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 4px;
+}
+.wcc-text h2 {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.2rem;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+.wcc-text h2 em {
+  color: #1fdd6e;
+  font-style: italic;
+}
+.wcc-text p {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.wcc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.wcc-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  text-align: center;
+  min-width: 70px;
+}
+.wcc-chip strong {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--yellow);
+  line-height: 1;
+}
+.wcc-chip span {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.class-now-card {
+  background-color: var(--sb-bg-t);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeUp 0.5s 0.1s ease both;
+  position: relative;
+  overflow: hidden;
+}
+.class-now-card::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(18, 160, 106, 0.12);
+}
+.cnc-pulse {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: rgba(18, 160, 106, 0.2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.cnc-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(18, 160, 106, 0.3);
+  animation: ring 2s ease infinite;
+}
+.cnc-pulse svg {
+  width: 20px;
+  height: 20px;
+  stroke: #5de8ae;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cnc-info {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+.cnc-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 3px;
+}
+.cnc-disc {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cnc-class {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.cnc-hour {
+  text-align: right;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.cnc-hour strong {
+  display: block;
+  font-family: "DM Serif Display", serif;
+  font-size: 1.3rem;
+  color: #1fdd6e;
+  line-height: 1;
+}
+.cnc-hour span {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+.next-lesson-card-t {
+  background-color: #e6f5ee;
+  border: 1px solid #a7dfc4;
+  border-radius: var(--radius-lg);
+  padding: 14px 18px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+.nlc-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background-color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.nlc-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.nlc-info .nlc-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 2px;
+}
+.nlc-info .nlc-disc {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--txt-dark);
+  margin-bottom: 1px;
+}
+.nlc-info .nlc-meta {
+  font-size: 0.74rem;
+  color: var(--txt-2);
+}
+.nlc-hour {
+  margin-left: auto;
+  text-align: right;
+  flex-shrink: 0;
+}
+.nlc-hour strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--green);
+}
+.nlc-hour span {
+  font-size: 0.68rem;
+  color: var(--txt-2);
+}
+
+
 @keyframes pulse {
   0%,
   100% {

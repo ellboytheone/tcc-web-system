@@ -1,69 +1,3 @@
-<?php
-  $prof = [
-    'nome'          => $_SESSION['nome'] ?? 'António Calunga',
-    'especialidade' => 'Engenharia Electrônia',
-    'email'         => $_SESSION['email'] ?? 'antoniocalunga@gabnet.ao',
-  ];
-
-  /* ── Disciplinas leccionadas ──────────────────────────────────
-    SELECT d.nome, COUNT(DISTINCT h.id_turma) AS num_turmas
-    FROM professores_disciplinas pd
-    JOIN disciplina d ON pd.id_disciplina = d.id
-    LEFT JOIN horario h ON h.id_disciplina = d.id AND h.id_professor = ?
-    WHERE pd.id_professor = ? GROUP BY d.id
-  */
-  $disciplinas = [
-      ['nome' => 'Introdução à Electrônica', 'num_turmas' => 2],
-      ['nome' => 'Electrotecnia', 'num_turmas' => 1],
-      ['nome' => 'Hardware',            'num_turmas' => 2],
-  ];
-  /* ── Horário semanal ──────────────────────────────────────────
-   SELECT h.dia_semana, h.hora_inicio, h.hora_fim,
-          d.nome AS disciplina, t.nome AS turma
-   FROM horario h
-   JOIN disciplina d ON h.id_disciplina = d.id
-   JOIN turma t ON h.id_turma = t.id
-   WHERE h.id_professor = ?
-   ORDER BY FIELD(h.dia_semana,'Segunda','Terça','Quarta','Quinta','Sexta'), h.hora_inicio
-  */
-  $horario_semana = [
-      ['dia'=>'Segunda','hora_inicio'=>'07:30','hora_fim'=>'09:00','disciplina'=>'Introdução à Electrônica','turma'=>'Turma 12INF - 1'],
-      ['dia'=>'Segunda','hora_inicio'=>'09:00','hora_fim'=>'10:30','disciplina'=>'Hardware',           'turma'=>'Turma 11INF - 1'],
-      ['dia'=>'Terça',  'hora_inicio'=>'07:30','hora_fim'=>'09:00','disciplina'=>'Electrotecnia',   'turma'=>'Turma 12INF - 1'],
-      ['dia'=>'Terça',  'hora_inicio'=>'10:45','hora_fim'=>'12:15','disciplina'=>'Hardware',           'turma'=>'Turma 10INF - 1'],
-      ['dia'=>'Quarta', 'hora_inicio'=>'07:30','hora_fim'=>'09:00','disciplina'=>'Introdução à Electrônica','turma'=>'Turma 11INF - 1'],
-      ['dia'=>'Quarta', 'hora_inicio'=>'09:00','hora_fim'=>'10:30','disciplina'=>'Hardware',           'turma'=>'Turma 11INF - 1'],
-      ['dia'=>'Quinta', 'hora_inicio'=>'10:45','hora_fim'=>'12:15','disciplina'=>'Electrotecnia',   'turma'=>'Turma 12INF - 1'],
-      ['dia'=>'Sexta',  'hora_inicio'=>'09:00','hora_fim'=>'10:30','disciplina'=>'Introdução à Electrônica','turma'=>'Turma 10INF - 1'],
-      ['dia'=>'Sexta',  'hora_inicio'=>'10:45','hora_fim'=>'12:15','disciplina'=>'Hardware',           'turma'=>'Turma 12INF - 1'],
-  ];
-  $dias_semana   = ['Sunday'=>'Domingo','Monday'=>'Segunda','Tuesday'=>'Terça',
-                  'Wednesday'=>'Quarta','Thursday'=>'Quinta','Friday'=>'Sexta','Saturday'=>'Sábado'];
-  $hoje       = $dias_semana[date('l')];
-  $dias_uteis = ['Segunda','Terça','Quarta','Quinta','Sexta'];
-
-  $aulas_hoje         = array_filter($horario_semana, fn($a) => $a['dia'] === $hoje);
-  $total_aulas_hoje   = count($aulas_hoje);
-  $total_turmas       = count(array_unique(array_column($horario_semana, 'turma')));
-  $total_aulas_semana = count($horario_semana);
-  /* ── Comunicados ──────────────────────────────────────────────
-    SELECT titulo, importancia, criado_em FROM comunicado
-    WHERE filtro IN ('Todos','Professores')
-    ORDER BY criado_em DESC LIMIT 3
-  */
-  $comunicados = [
-      ['titulo'=>'Reunião pedagógica — 15 de Maio', 'importancia'=>'Alta',  'criado_em'=>'2026-04-20'],
-      ['titulo'=>'Entrega de pautas do 2.º trimestre','importancia'=>'Média', 'criado_em'=>'2026-04-13'],
-      ['titulo'=>'Manutenção do portal — Sábado',     'importancia'=>'Baixa', 'criado_em'=>'2026-04-11'],
-  ];
-
-  /* ── Última solicitação ───────────────────────────────────────
-    SELECT titulo, status, criado_em FROM comunicado
-    WHERE id_autor = ? ORDER BY criado_em DESC LIMIT 1
-  */
-  $ultima_solic = ['titulo'=>'Adiamento da feira tecnológica de 30 de Abril','status'=>'pendente','criado_em'=>'2026-04-14'];
-?>
-
 <!doctype html>
 <html lang="pt-PT">
   <head>
@@ -84,6 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Sora:wght@100..800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/gabnet-system/assets/css/announcements.css">
     <link rel="stylesheet" href="/gabnet-system/assets/css/dashboard.css">
     <link rel="stylesheet" href="/gabnet-system/assets/css/styles.css" />
     <title>Solicitar Anúncio - GABnet</title>
@@ -105,8 +40,8 @@
       <div class="id-card">
         <div class="avatar-lg">P</div>
         <div class="id-info">
-          <strong><?= htmlspecialchars($prof['nome']) ?></strong>
-          <small><?= htmlspecialchars($prof['especialidade']) ?></small>
+          <strong>Antõnio Calunga</strong>
+          <small>Engenharia Electrõnica</small>
           <div class="id-badge">
             <svg viewBox="0 0 24 24">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
@@ -175,7 +110,7 @@
             <span></span>
           </button>
           <div class="breadcrumb">
-            GABnet &rsaquo; Painel de Professor &rsaquo; <strong>Solicitar Anúncio</strong>
+            GABnet &rsaquo; <a href="index.php">Painel de Professor</a> &rsaquo; <strong>Solicitar Anúncio</strong>
           </div>
         </section>
         <section class="topbar-right">
@@ -184,13 +119,202 @@
           </div>
           <a href="profile.php">
             <div class="topbar-avatar">
-              <?= strtoupper(substr($prof['nome'], 0, 1)) ?? 'E' ?>
+              A
             </div>
           </a>
         </section>
       </header>
       <main class="content">
-
+        <header class="main-header">
+          <h1>Solicitar <em>anúncio</em></h1>
+          <p>Envia um pedido ao Administrador para publicar um comunicado no portal.</p>
+        </header>
+        <section class="flow-card">
+          <div class="flow-label">Como funciona o processo</div>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <div class="fs-num">1</div>
+              <span class="fs-txt">Preenches o formulário</span>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+              <div class="fs-num">2</div>
+              <span class="fs-txt">Administrador analisa</span>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+              <div class="fs-num">3</div>
+              <span class="fs-txt">Aprovado → publicado</span>
+            </div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">
+              <div class="fs-num">4</div>
+              <span class="fs-txt">Alunos recebem o aviso</span>
+            </div>
+          </div>
+          <div class="flow-nota">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            A solicitação fica pendente até o Administrador a aprovar ou rejeitar. Podes acompanhar o estado abaixo.
+          </div>
+        </section>
+        <div class="main-grid">
+          <div class="left-col">
+            <section class="panel" id="request-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">  
+                  <svg viewBox="0 0 24 24">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                  Solicitar anúncio
+                </h2>
+              </div>
+              <div class="requests-form">
+                <form method="POST" action="solicitar-anuncio.php" id="form-solic">
+                  <div class="form-field">
+                    <label for="title">Título <span>*</span></label>
+                    <input type="text" id="title" name="title" placeholder="Ex: Cancelamento de aulas..." maxlength="150" required/>
+                  </div>
+                  <div class="form-field">
+                    <label>Nível de importância <span>*</span></label>
+                    <div class="imp-cards">
+                      <div class="imp-card">
+                        <input type="radio" id="imp-b" name="importance" value="Baixa" onchange="updatePreview()"/>
+                        <label for="imp-b" class="low">
+                          <div class="imp-icon ii-low">
+                            <svg viewBox="0 0 24 24">
+                              <circle cx="12" cy="12" r="10"/>
+                              <line x1="12" y1="8" x2="12" y2="12"/>
+                              <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                          </div>
+                          <div class="imp-lbl">Baixa</div>
+                          <div class="imp-desc">Informação geral</div>
+                        </label>
+                      </div>
+                      <div class="imp-card">
+                        <input type="radio" id="imp-m" name="importance" value="Média" onchange="updatePreview()"/>
+                        <label for="imp-m" class="medium">
+                          <div class="imp-icon ii-medium">
+                            <svg viewBox="0 0 24 24">
+                              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                              <line x1="12" y1="9" x2="12" y2="13"/>
+                              <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                          </div>
+                          <div class="imp-lbl">Média</div>
+                          <div class="imp-desc">Requer atenção</div>
+                        </label>
+                      </div>
+                      <div class="imp-card">
+                        <input type="radio" id="imp-a" name="importance" value="Alta" onchange="updatePreview()"/>
+                        <label for="imp-a" class="high">
+                          <div class="imp-icon ii-high">
+                            <svg viewBox="0 0 24 24">
+                              <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/>
+                              <line x1="12" y1="8" x2="12" y2="12"/>
+                              <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                          </div>
+                          <div class="imp-lbl">Alta</div>
+                          <div class="imp-desc">Urgente — destaque</div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label for="target">Alvo<span>*</span></label>
+                    <select id="target" name="target" required>
+                      <option value="" disabled selected>Selecionar...</option>
+                      <option value="everyone">Todos</option>
+                      <option value="students">Alunos</option>
+                      <option value="teachers">Professores</option>
+                      <option value="admins">Administradores</option>
+                      <option value="class">Turma</option>
+                    </select>
+                    <select id="target-class" name="target-class" style="display: none;">
+                      <option value="" disabled selected>Selecione a turma</option>
+                      <option value="10 INF">10ª Informática</option>
+                      <option value="11 INF">11ª Informática</option>
+                      <option value="12 INF">12ª Informática</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label for="content">Mensagem <span>*</span></label>
+                    <textarea id="content" name="content" placeholder="Descreve o conteúdo do anúncio..." maxlength="1000" required></textarea>
+                  </div>
+                  <div class="form-field include-parents-field">
+                    <input type="checkbox" name="include-parents" id="include-parents"/>
+                    <label for="include-parents">Incluir Encarregados?</label>
+                  </div>
+                  <button type="submit" class="btn-submit">
+                    <svg viewBox="0 0 24 24">
+                      <line x1="22" y1="2" x2="11" y2="13"/>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                    Enviar solicitação
+                  </button>
+                  <p class="form-note">Será publicado após aprovação do Administrador.</p>
+                </form>
+              </div>
+            </section>
+          </div>
+          <div class="right-col">
+            <section class="preview-section">
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    Pré-visualização
+                  </h2>
+                </div>
+                <div class="panel-body">
+                  <div class="prev-note">
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="12" y1="8" x2="12" y2="12"/>
+                      <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    Assim aparecerá depois de aprovado. Actualiza enquanto escreves.
+                  </div>
+                  <div class="prev-card" id="prev-card">
+                    <div id="rp-wrapper">
+                      <div class="rp-imp-stripe" id="rp-stripe"></div>
+                      <div class="rp-header">
+                        <div class="rp-badge-row">
+                          <span class="imp-label low" id="rp-badge">Importância</span>
+                          <span class="target-tag" id="rp-target">Alvo</span>
+                        </div>
+                        <div class="rp-title" id="rp-title">Titulo do Comunicado</div>
+                      </div>
+                      <div class="rp-body">
+                        <div class="rp-content" id="rp-content">Exemplo de conteudo, aqui fica o comunicado em si.</div>
+                        <div class="rp-meta">
+                          <div class="rp-meta-item">
+                            <div class="rp-meta-label">Publicado por</div>
+                            <div class="rp-meta-val" id="rp-author">Prof. Antônio Calunga</div>
+                          </div>
+                          <div class="rp-meta-item">
+                            <div class="rp-meta-label">Data</div>
+                            <div class="rp-meta-val" id="rp-date"><?= date("d/m/Y")?></div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </main>
     </div>
     <script src="/gabnet-system/assets/js/dashboard.js"></script>
