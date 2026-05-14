@@ -322,6 +322,8 @@ table {
   background-color: var(--sb-bg-a);
 }
 .content {
+  display: flex;
+  flex-direction: column;
   background-color: var(--bg);
   flex: 1;
   padding: 28px;
@@ -345,16 +347,13 @@ table {
 }
 .main-header h1 em,
 .greeting h1 em {
+  font-family: "DM Serif Display", serif;
   color: var(--blue-m);
   font-style: italic;
 }
 .teacher .main-header h1 em,
 .teacher .greeting h1 em {
   color: var(--green);
-}
-.admin .main-header h1 em,
-.admin .greeting h1 em {
-  color: var(--blue-c);
 }
 .main-header p,
 .greeting p {
@@ -842,7 +841,9 @@ table {
 
 /* Painel do professor*/
 .admin .greeting,
-.teacher .greeting {
+.teacher .greeting,
+.admin .main-header,
+.teacher .main-header {
   text-align: start;
   display: flex;
   align-items: center;
@@ -850,6 +851,11 @@ table {
   padding: 0 20px;
   margin-bottom: 26px;
   animation: fadeUp 0.5s ease both;
+}
+.main-header-text {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
 }
 .announce-btn {
   display: flex;
@@ -1126,6 +1132,8 @@ table {
   transition-duration: 0.15s;
   appearance: none;
 }
+.form-field input:focus {
+}
 .imp-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1239,6 +1247,11 @@ table {
   background-color: var(--white);
   box-shadow: 0 0 0 3px rgba(18, 160, 106, 0.12);
 }
+.admin .form-field input:focus,
+.admin .form-field select:focus,
+.admin .form-field textarea:focus {
+  border-color: var(--blue-m);
+}
 .btn-submit {
   width: 100%;
   padding: 11px;
@@ -1257,8 +1270,15 @@ table {
     transform 0.12s;
   box-shadow: 0 3px 12px rgba(18, 160, 106, 0.3);
 }
+.admin .btn-submit {
+  background-color: var(--sb-bg-a);
+}
 .btn-submit:hover {
   background-color: #12a06a;
+  transform: translateY(-1px);
+}
+.admin .btn-submit:hover {
+  background-color: #122a4e;
   transform: translateY(-1px);
 }
 .btn-submit svg {

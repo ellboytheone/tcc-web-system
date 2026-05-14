@@ -126,8 +126,10 @@
       </header>
       <main class="content">
         <header class="main-header">
-          <h1>Solicitar <em>anúncio</em></h1>
-          <p>Envia um pedido ao Administrador para publicar um comunicado no portal.</p>
+          <div class="main-header-text">
+            <h1>Solicitar <em>anúncio</em></h1>
+            <p>Envia um pedido ao Administrador para publicar um comunicado no portal.</p>
+          </div>
         </header>
         <section class="flow-card">
           <div class="flow-label">Como funciona o processo</div>
@@ -227,7 +229,7 @@
                     </div>
                   </div>
                   <div class="form-field">
-                    <label for="target">Alvo<span>*</span></label>
+                    <label for="target">Destion<span>*</span></label>
                     <select id="target" name="target" required>
                       <option value="" disabled selected>Selecionar...</option>
                       <option value="everyone">Todos</option>

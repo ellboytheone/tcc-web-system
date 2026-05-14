@@ -126,8 +126,10 @@
       </header>
       <main class="content">
         <header class="main-header">
-          <h1>O teu <em>horário</em></h1>
-          <p>Informática e Sistemas · 3 turmas · 3 disciplinas</p>
+          <div class="main-header-text">
+            <h1>O teu <em>horário</em></h1>
+            <p>Informática e Sistemas · 3 turmas · 3 disciplinas</p>
+          </div>
         </header>
         <section class="week-charge-card">
           <div class="wcc-icon">

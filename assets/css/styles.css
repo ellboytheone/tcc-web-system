@@ -16,6 +16,7 @@ html {
   --blue-brd: #bacaf5;
   --yellow: #f5b800;
   --yellow-s: #ffcf40;
+  --yellow-dim: rgba(245,184,0,.15);
   --yellow-soft: #fffbea;
   --green: #0a6e3f;
   --green-bg: #e6f4ed;
@@ -35,6 +36,7 @@ html {
   --txt-dark: #0d1b35;
   --txt-2: #5b6780;
   --txt-3: #9aaac0;
+  --header-h: 93px;
   --radius: 12px;
   --radius-lg: 20px;
   --shadow: 0 4px 24px rgba(11, 61, 145, 0.1);
@@ -89,6 +91,7 @@ svg {
   position: sticky;
   top: 0;
   z-index: 100;
+  height: var(--header-h);
   background-color: var(--blue);
   border-bottom: 2px solid var(--yellow);
 }
@@ -193,7 +196,7 @@ svg {
   border-color: rgba(255, 255, 255, 0.7);
 }
 .intro {
-  height: calc(100vh - 92.99px);
+  height: calc(100vh - var(--header-h));
   background-color: var(--blue);
   padding: 90px 0 80px;
   position: relative;

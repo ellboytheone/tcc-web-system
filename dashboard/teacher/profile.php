@@ -127,10 +127,10 @@
       </header>
       <main class="content">
         <header class="main-header">
-          <h1>
-            Seu <em>perfil</em>
-          </h1>
-          <p>Consulta os teus dados académicos e gere as informações da tua conta.</p>
+          <div class="main-header-text">
+            <h1>Seu <em>perfil</em></h1>
+            <p>Consulta os teus dados académicos e gere as informações da tua conta.</p>
+          </div>
         </header>
         <section class="my-data-section">
           <div class="panel">
@@ -216,6 +216,10 @@
               <div class="id-field">
                 <span class="id-field-label">Email</span>
                 <span class="id-field-val">antoniocalunga@gabnet.ao</span>
+              </div>
+              <div class="id-field">
+                <span class="id-field-label">Membro desde</span>
+                <span class="id-field-val">10/04/2026</span>
               </div>
               <div class="id-discs">
                 <div class="id-discs-label">Disciplinas leccionadas</div>

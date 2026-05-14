@@ -94,6 +94,7 @@
             <polygon points="22 2 15 22 11 13 2 9 22 2"/>
           </svg>
           Criar Comunicado
+          <span class="nav-badge">3</span>
         </a>
         <a href="announcement.php" class="nav-link">
           <svg viewBox="0 0 24 24">
@@ -101,7 +102,6 @@
             <path d="M13.73 21a2 2 0 01-3.46 0"/>
           </svg>
           Comunicados
-          <span class="nav-badge">3</span>
         </a>
       </nav>
       <footer class="sidebar-footer">
@@ -135,9 +135,7 @@
         </section>
         <section class="topbar-right">
           <div class="topbar-date"><?= date('d/m/Y') ?></div>
-          <a href="profile.php">
-            <div class="topbar-avatar">A</div>
-          </a>
+          <div class="topbar-avatar">A</div>
         </section>
       </header>
       <main class="content">
@@ -153,7 +151,7 @@
               <line x1="22" y1="2" x2="11" y2="13"/>
               <polygon points="22 2 15 22 11 13 2 9 22 2"/>
             </svg>
-            Solicitar anúncio
+            Criar anúncio
           </a>
         </section>
         <section class="stats-grid">
