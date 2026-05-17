@@ -1,14 +1,17 @@
 <?php
-
-    $dbHost = 'localhost';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'gabnet-system';
-
-    $connect = new mysqli($dbHost,$dbUsername,$dbPassword,$dbName);
-
-    if ($connect->connect_error) {
-      die("Erro de conexão: " . $connect->connect_error);
-    }
-    
+   $host   = 'localhost';
+   $dbname = 'gabnet_system';
+   $user   = 'root';
+   $password   = '';
+   
+   try {
+       $pdo = new PDO(
+           "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+           $user, $password,
+           [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+       );
+   } catch (PDOException $e) {
+       die('Erro de ligação: ' . $e->getMessage());
+   }
 ?>
