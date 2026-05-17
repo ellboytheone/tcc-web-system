@@ -1,8 +1,183 @@
 <?php
-  $passo = 1;   
-  $email_passo = '';
-  $msg = '';
-  $msg_tipo = '';
+
+require 'config/database.php';
+require 'includes/mail.php';
+require 'includes/functions.php';
+
+$passo = 1;   
+$email_passo = '';
+$msg = '';
+$msg_tipo = '';
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    //ENVIAR CÓDIGO
+    if(isset($_POST['acao']) &&
+      $_POST['acao'] === 'verificar_email'){
+
+      $email = trim($_POST['email']);
+
+      $email_passo = $email;
+
+      //PROCURA PESSOA
+      $pessoa = encontrarPessoa($pdo, $email);
+
+      if(!$pessoa){
+
+          $msg = 'Email não encontrado.';
+          $msg_tipo = 'erro';
+
+      }elseif($pessoa['registrado']){
+
+          $msg = 'Conta já activada.';
+          $msg_tipo = 'erro';
+
+      }else{
+
+          //GERA OTP
+          $codigo = random_int(100000, 999999);
+
+          $expira = date(
+            'Y-m-d H:i:s',
+            strtotime('+20 minutes')
+          );
+
+          //GUARDA OTP
+          $sql = $pdo->prepare("
+              UPDATE {$pessoa['tabela']}
+              SET otp_code = ?,
+                  otp_expira = ?
+              WHERE id = ?
+          ");
+
+          $sql->execute([
+              $codigo,
+              $expira,
+              $pessoa['id']
+          ]);
+
+          //ENVIA EMAIL
+          $enviado = enviarCodigo(
+              $email,
+              $pessoa['nome'],
+              $codigo
+          );
+
+          if($enviado){
+
+              $passo = 2;
+
+              $msg = 'Código enviado.';
+              $msg_tipo = 'ok';
+
+          }else{
+
+              $msg = 'Erro ao enviar email.';
+              $msg_tipo = 'erro';
+          }
+      }
+    }
+
+    if(isset($_POST['acao']) &&
+      $_POST['acao'] === 'activar_conta'){
+
+        $email = trim($_POST['email']);
+
+        $codigo = trim($_POST['codigo']);
+
+        $senha = $_POST['nova_senha'];
+
+        $confirmar = $_POST['confirmar_senha'];
+
+        $passo = 2;
+
+        $email_passo = $email;
+
+        //VALIDA SENHAS
+        if($senha !== $confirmar){
+
+            $msg = 'As senhas não coincidem.';
+            $msg_tipo = 'erro';
+
+        }else{
+
+            //PROCURA PESSOA
+            $pessoa = encontrarPessoa($pdo, $email);
+
+            if(!$pessoa){
+
+                $msg = 'Conta não encontrada.';
+                $msg_tipo = 'erro';
+
+            }elseif($pessoa['otp_code'] !== $codigo){
+
+                $msg = 'Código inválido.';
+                $msg_tipo = 'erro';
+
+            }elseif(
+                strtotime($pessoa['otp_expira']) < time()
+            ){
+
+                $msg = 'Código expirado.';
+                $msg_tipo = 'erro';
+
+            }else{
+
+                //HASH
+                $hash = password_hash(
+                    $senha,
+                    PASSWORD_DEFAULT
+                );
+
+                //CRIA UTILIZADOR
+                $sql = $pdo->prepare("
+                    INSERT INTO usuario (
+                        nome,
+                        email,
+                        senha,
+                        papel,
+                        referencia_id
+                    )
+                    VALUES (?, ?, ?, ?)
+                ");
+
+                $sql->execute([
+
+                    $pessoa['nome'],
+
+                    $email,
+
+                    $hash,
+
+                    $pessoa['papel'],
+
+                    $pessoa['id']
+                ]);
+
+                //ID DO UTILIZADOR
+                $usuario_id = $pdo->lastInsertId();
+
+                //ACTIVAR CONTA
+                $up = $pdo->prepare("
+                    UPDATE {$pessoa['tabela']}
+                    SET registrado = 1,
+                        otp_code = NULL,
+                        otp_expira = NULL,
+                        usuario_id = ?
+                    WHERE id = ?
+                ");
+
+                $up->execute([
+                    $usuario_id,
+                    $pessoa['id']
+                ]);
+
+                header('Location: login.php');
+                exit;
+            }
+        }
+    }
+}
+
 ?>
 <!doctype html>
 <html lang="pt-PT">
@@ -86,7 +261,7 @@
         </section>
   
         <?php if (!empty($msg)): ?>
-        <div class="reg-alert reg-alert-<?= $msg_type ?>">
+        <div class="reg-alert reg-alert-<?= $msg_tipo ?>">
           <svg viewBox="0 0 24 24">
             <?php if ($msg_tipo==='ok'): ?><polyline points="20 6 9 17 4 12"/>
             <?php else: ?><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
@@ -103,7 +278,7 @@
           </section>
   
           <form method="POST" action="register.php" id="form-p1" novalidate>
-            <input type="hidden" name="act" value="check_email"/>
+            <input type="hidden" name="acao" value="verificar_email"/>
             <div class="field">
               <label for="email">Endereço de email <span>*</span></label>
               <div class="input-wrap">
@@ -156,7 +331,7 @@
           <form method="POST" action="register.php" id="form-p2">
             <input type="hidden" name="acao"   value="activar_conta"/>
             <input type="hidden" name="email"  id="email-hidden" value="<?= htmlspecialchars($email_passo) ?>"/>
-            <input type="hidden" name="code" id="codigo-hidden" value=""/>
+            <input type="hidden" name="codigo" id="codigo-hidden" value=""/>
   
             <div class="field">
               <label>Código de activação <span>*</span></label>
@@ -192,7 +367,7 @@
                   <path d="M7 11V7a5 5 0 0110 0v4"/>
                 </svg>
                 <input
-                  type="password" id="nova-senha" name="new_senha"
+                  type="password" id="nova-senha" name="nova_senha"
                   placeholder="Cria uma senha segura"
                   minlength="6" required autocomplete="new-password"
                   oninput="avaliarForca(this.value)"
@@ -235,7 +410,7 @@
                 <input
                   type="password" 
                   id="confirmar-senha" 
-                  name="confirm_password"
+                  name="confirmar_senha"
                   placeholder="Repete a senha"
                   minlength="6" 
                   required 
@@ -321,12 +496,8 @@
       irParaPasso(1);
       setTimeout(() => document.getElementById('email').focus(), 50);
     }
-    /*TODO: retirar o e.preventDefault() quando o PHP estiver pronto.
-         O submit deve ir para registro.php?acao=verificar_email
-         e o PHP redireciona de volta com $passo=2 e $email_passo preenchido.*/
 
     document.getElementById('form-p1').addEventListener('submit', function(e){
-      e.preventDefault(); /* ← REMOVER quando PHP implementado */
       const emailEl = document.getElementById('email');
       const email   = emailEl.value.trim();
       if(!email || !email.includes('@')){ emailEl.classList.add('error'); return; }
@@ -336,23 +507,9 @@
       const btn = document.getElementById('btn-p1');
       btn.classList.add('loading');
       btn.innerHTML = iconeEnvio() + ' A enviar...';
-
-      /* Simulação de rede (remover em produção) */
-      setTimeout(function(){
-        btn.classList.remove('loading');
-        btn.innerHTML = iconeEnvio() + ' Enviar código de activação';
-        /* Passa o email para o passo 2 */
-        document.getElementById('email-display').textContent = email;
-        document.getElementById('email-hidden').value = email;
-        irParaPasso(2);
-        iniciarTimer();
-        setTimeout(() => document.getElementById('d0').focus(), 100);
-      }, 1000);
     });
 
     document.getElementById('form-p2').addEventListener('submit', function(e){
-      e.preventDefault(); /* ← REMOVER quando PHP implementado */
-
       /* Monta o código a partir das caixas */
       const codigo = obterCodigo();
       document.getElementById('codigo-hidden').value = codigo;
@@ -433,7 +590,7 @@
         el.value = ''; el.classList.remove('preenchido','erro');
       });
     }
-    function marcarCodigoErro{
+    function marcarCodigoErro(){
       digitIds.forEach(function(id){
         document.getElementById(id).classList.add('erro');
         setTimeout(() => document.getElementById(id).classList.remove('erro'), 800);
