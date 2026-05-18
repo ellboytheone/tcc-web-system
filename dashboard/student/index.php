@@ -1,18 +1,7 @@
 <?php
-session_start();
+$papel_permitido = 'Estudante';
+require __DIR__ . '/../../auth/auth_check.php';
 
-if (!isset($_SESSION['usuario_id']) || $_SESSION['papel'] !== 'Estudante') {
-    header('Location: /gabnet-system/login.php');
-    exit;
-}
-
-/* --- Dados do aluno (substituir por query real) ---
-   Exemplo de query:
-   SELECT a.*, t.nome AS turma_nome, t.periodo
-   FROM aluno a
-   JOIN turma t ON a.id_turma = t.id
-   WHERE a.id_usuario = ?
-*/
 $aluno = [
     'nome'        => $_SESSION['nome'] ?? 'Nome de Estudante',
     'inscricao'   =>  'INF-2024-001',

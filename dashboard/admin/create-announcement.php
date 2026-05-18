@@ -1,4 +1,9 @@
-<!doctype html>
+<?php
+$papel_permitido = 'Administrador';
+require __DIR__ . '/../../auth/auth_check.php';
+
+
+?><!doctype html>
 <html lang="pt-PT">
   <head>
     <meta charset="UTF-8" />

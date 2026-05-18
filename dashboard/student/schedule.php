@@ -1,3 +1,9 @@
+<?php
+$papel_permitido = 'Estudante';
+require __DIR__ . '/../../auth/auth_check.php';
+
+
+?>
 
 <!doctype html>
 <html lang="pt-PT">

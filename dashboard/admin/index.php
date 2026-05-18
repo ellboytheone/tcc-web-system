@@ -1,10 +1,7 @@
 <?php
-session_start();
+$papel_permitido = 'Administrador';
+require __DIR__ . '/../../auth/auth_check.php';
 
-if (!isset($_SESSION['usuario_id']) || $_SESSION['papel'] !== 'Administrador') {
-    header('Location: /gabnet-system/login.php');
-    exit;
-}
 
 ?>
 
