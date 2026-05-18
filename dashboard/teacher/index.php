@@ -86,7 +86,7 @@
         </a>
       </nav>
       <footer class="sidebar-footer">
-        <form method="POST" action="/auth/logout.php">
+        <form method="POST" action="/gabnet-system/auth/logout.php">
           <button type="submit" class="btn-logout">
             <svg viewBox="0 0 24 24">
               <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />

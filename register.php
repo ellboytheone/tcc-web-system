@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (isset($_SESSION['usuario_id'])) {
+  switch ($_SESSION['papel']) {
+    case 'Administrador': header('Location: dashboard/admin/index.php'); exit;
+    case 'Professor':     header('Location: dashboard/teacher/index.php'); exit;
+    case 'Estudante':     header('Location: dashboard/student/index.php'); exit;
+  }
+}
 
 require 'config/database.php';
 require 'includes/mail.php';
@@ -137,7 +146,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         papel,
                         referencia_id
                     )
-                    VALUES (?, ?, ?, ?)
+                    VALUES (?, ?, ?, ?, ?)
                 ");
 
                 $sql->execute([
@@ -162,7 +171,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                     SET registrado = 1,
                         otp_code = NULL,
                         otp_expira = NULL,
-                        usuario_id = ?
+                        id_usuario = ?
                     WHERE id = ?
                 ");
 

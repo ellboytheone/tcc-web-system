@@ -1,14 +1,8 @@
 <?php
-/* ============================================================
-   dashboard/aluno/index.php
-   Regra de negócio: apenas alunos autenticados acedem a esta página.
-   Substitui os dados fictícios abaixo pelas queries reais ao banco.
-   ============================================================ */
 session_start();
 
-/* 
 if (!isset($_SESSION['usuario_id']) || $_SESSION['papel'] !== 'Estudante') {
-    header('Location: ../../login.php');
+    header('Location: /gabnet-system/login.php');
     exit;
 }
 
@@ -20,8 +14,8 @@ if (!isset($_SESSION['usuario_id']) || $_SESSION['papel'] !== 'Estudante') {
    WHERE a.id_usuario = ?
 */
 $aluno = [
-    'nome'        => $_SESSION['nome'] ?? 'Emmanuel Mateus',
-    'inscricao'   => 'INF-2024-001',
+    'nome'        => $_SESSION['nome'] ?? 'Nome de Estudante',
+    'inscricao'   =>  'INF-2024-001',
     'turma'       => 'Turma 12INF - 1',
     'periodo'     => 'Manhã',
     'classe'      => '12.ª Classe',
