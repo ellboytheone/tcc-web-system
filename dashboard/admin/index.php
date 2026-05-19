@@ -13,7 +13,6 @@ $titulo_documento = 'Meu Painel';
 $class_body = 'admin';
 require __DIR__ . '/../../includes/head.php';
 ?>
-
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-logo">
         <img
