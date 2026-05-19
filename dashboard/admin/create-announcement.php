@@ -1,36 +1,21 @@
 <?php
+
+//$papel_permitido avisa ao auth_check, o papel de usuario permitido nesta pagina
 $papel_permitido = 'Administrador';
 require __DIR__ . '/../../auth/auth_check.php';
 
+//retorna todos os dados do aluno em um array aluno[etc...]
+require __DIR__ . '/../../includes/my_data.php';
 
-?><!doctype html>
-<html lang="pt-PT">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="/gabnet-system/assets/images/favicon.ico"
-      type="image/x-icon"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Sora:wght@100..800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/gabnet-system/assets/css/admin.css">
-    <link rel="stylesheet" href="/gabnet-system/assets/css/announcements.css">
-    <link rel="stylesheet" href="/gabnet-system/assets/css/dashboard.css" />
-    <link rel="stylesheet" href="/gabnet-system/assets/css/styles.css" />
-    <title>Criar Comunicado - GABnet</title>
-  </head>
-  <body class="admin">
-    <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+//$titulo_documento avisa ao head.php qual e o titulo da pagina
+$titulo_documento = 'Criar Comunicado';
+//$class_body avisa qual e a class do body (para questoes de estilizacao)
+$class_body = 'admin';
+//$css_body avisa qual e o link css a se adicionar, ATT: que esteja dentro de assets/css/
+$css_extra = ['announcements.css', 'admin.css'];
+require __DIR__ . '/../../includes/head.php';
+?>
+
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-logo">
         <img

@@ -11,7 +11,9 @@
   }
 
   /* ── 2. Ligação à base de dados ──────────────────────────────── */
+  
   require_once 'config/database.php';
+  
   /* ── 3. Processamento do POST ────────────────────────────────── */
   $erro = '';
   $email_val = '';   /* preserva o email no campo após erro */
@@ -31,7 +33,7 @@
 
           /* 3c. Consulta à BD — busca por email único */
           $stmt = $pdo->prepare('
-              SELECT id, nome, email, senha, papel
+              SELECT id, nome, email, senha, papel, criado_em, referencia_id
               FROM usuario
               WHERE email = ?
               LIMIT 1
@@ -53,12 +55,15 @@
               $_SESSION['nome']       = $usuario['nome'];
               $_SESSION['email']      = $usuario['email'];
               $_SESSION['papel']      = $usuario['papel'];
+              $_SESSION['criado_em']  = $usuario['criado_em'];
+              $_SESSION['referencia'] = $usuario['referencia_id'];
+              
 
               /* 3g. Redireciona para o painel correcto pelo papel (RN: acesso por papel) */
               switch ($usuario['papel']) {
-                  case 'Administrador': header('Location: dashboard/admin/index.php');       exit;
+                  case 'Administrador': header('Location: dashboard/admin/index.php'); exit;
                   case 'Professor':     header('Location: dashboard/teacher/index.php'); exit;
-                  case 'Estudante':     header('Location: dashboard/student/index.php');     exit;
+                  case 'Estudante':     header('Location: dashboard/student/index.php'); exit;
                   default:
                       $erro = 'Tipo de conta não reconhecido. Contacta o administrador.';
               }

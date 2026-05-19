@@ -92,13 +92,14 @@
   width: 4px;
   flex-shrink: 0;
 }
-.imp-bar.high {
+.imp-bar.Alta {
   background-color: var(--red);
 }
-.imp-bar.medium {
+.imp-bar.Media
+.imp-bar.Média {
   background-color: var(--orange);
 }
-.imp-bar.low {
+.imp-bar.Baixa {
   background-color: var(--gray-txt);
 }
 .ann-body {
@@ -182,6 +183,7 @@
   padding: 52px 24px;
   text-align: center;
 }
+.empty-state > svg,
 .reading-placeholder svg {
   width: 36px;
   height: 36px;
@@ -191,7 +193,7 @@
   stroke-linecap: round;
   margin: 0 auto 14px;
   display: block;
-}
+}.empty-state > p,
 .reading-placeholder p {
   font-size: 0.84rem;
   color: var(--txt-3);
@@ -200,13 +202,14 @@
 .rp-imp-stripe {
   height: 5px;
 }
-.rp-imp-high .rp-imp-stripe {
+.rp-imp-Alta .rp-imp-stripe {
   background-color: var(--red);
 }
-.rp-imp-medium .rp-imp-stripe {
+.rp-imp-Media .rp-imp-stripe,
+.rp-imp-Média .rp-imp-stripe {
   background-color: var(--orange);
 }
-.rp-imp-low .rp-imp-stripe {
+.rp-imp-Baixa .rp-imp-stripe {
   background-color: var(--gray-txt);
 }
 .rp-header {

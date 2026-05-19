@@ -338,6 +338,7 @@ table {
   margin-bottom: 26px;
   animation: fadeUp 0.5s ease both;
 }
+.imp-label
 .main-header h1,
 .greeting h1 {
   font-family: "DM Serif Display", serif;
@@ -488,12 +489,40 @@ table {
   flex-direction: column;
   gap: 10px;
 }
+.right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .panel {
   background-color: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   animation: fadeUp 0.5s 0.25s ease both;
+}
+.panel .empty-state{
+  padding: 50px 0;
+  text-align: center;
+}
+.empty-state{
+  text-align: center;
+  animation: fadeUp 0.5s 0.25s ease both;
+}
+.empty-state > svg{
+  width: 36px;
+  height: 36px;
+  stroke: var(--txt-3);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  margin: 0 auto 14px;
+  display: block;
+}
+.empty-state > p{  
+  font-size: 0.84rem;
+  color: var(--txt-3);
+  line-height: 1.6;
 }
 .panel#quick-actions-panel,
 .panel#announcements-panel {
@@ -701,7 +730,8 @@ table {
   margin: 4px 0;
 }
 .lesson-card {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
   padding: 11px 14px;
   border-left: 3px solid transparent;
@@ -746,6 +776,31 @@ table {
 .status-futura {
   background-color: var(--bg2);
   color: var(--txt-2);
+}
+.now-badge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: var(--blue);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+.teacher .now-badge {
+  background-color: var(--green);
+}
+.now-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: pulse 1.5s ease infinite;
 }
 .profile-card {
   background-color: var(--blue);
@@ -1350,17 +1405,18 @@ table {
   align-self: flex-start;
   margin-top: 2px;
 }
-.imp-label.high {
+.imp-label.Alta {
   background: var(--red-bg);
   color: var(--red);
   border: 1px solid var(--red);
 }
-.imp-label.medium {
+.imp-label.Media,
+.imp-label.Média {
   background: var(--orange-bg);
   color: var(--orange);
   border: 1px solid var(--orange-brd);
 }
-.imp-label.low {
+.imp-label.Baixa {
   background: var(--bg2);
   color: var(--gray-txt);
   border: 1px solid var(--border);
